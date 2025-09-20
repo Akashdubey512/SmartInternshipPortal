@@ -4,12 +4,12 @@ import { User, Upload, Download, Edit3, Github as GitHub, ExternalLink, Plus, Tr
 const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [profileData, setProfileData] = useState({
-    name: 'John Doe',
-    email: 'john.doe@college.edu',
+    name: 'Aman Agarwal',
+    email: 'Aman@college.edu',
     phone: '+91 98765 43210',
     department: 'Computer Science Engineering',
-    year: '3rd Year',
-    cgpa: '8.75',
+    year: '2nd Year',
+    cgpa: '8.8',
     bio: 'Passionate software developer with a keen interest in full-stack web development and machine learning. Looking forward to contributing to innovative projects and gaining practical industry experience.',
     githubUrl: 'https://github.com/johndoe',
     linkedinUrl: 'https://linkedin.com/in/johndoe',
