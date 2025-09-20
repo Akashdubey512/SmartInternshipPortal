@@ -1,84 +1,126 @@
-// src/pages/StudentDashboard.jsx
+// /pages/studentDashboard.jsx
+
 import React from "react";
-import { Users, Target, BarChart, CheckCircle, Star, Award, TrendingUp } from "lucide-react";
-import Card from "../components/card";
-import SmCard from "../components/smcard";
+import  {useState } from "react";
+import { Bell, UserCircle2, BarChart, FileText, Briefcase, User } from "lucide-react";
 
-const stats = [
-  { label: "Applications Submitted", value: 12, icon: <Users className="w-6 h-6 text-white" /> },
-  { label: "Interviews Scheduled", value: 5, icon: <Target className="w-6 h-6 text-white" /> },
-  { label: "Offers Received", value: 2, icon: <BarChart className="w-6 h-6 text-white" /> },
-  { label: "Completed Trainings", value: 3, icon: <CheckCircle className="w-6 h-6 text-white" /> },
-];
-
-const achievements = [
-  { label: "Top Performer", icon: <Star className="w-5 h-5 text-yellow-400" /> },
-  { label: "Awarded Intern", icon: <Award className="w-5 h-5 text-green-400" /> },
-  { label: "Growth Rate", icon: <TrendingUp className="w-5 h-5 text-blue-400" /> },
-];
+// Import student section components
+import StudentInterviews from "../components/studentInterviews";
+import StudentMyapplications from "../components/studentMyapplications";
+import StudentOpportunities from "../components/studentOpportunities";
+import StudentProfile from "../components/studentProfile";
 
 const StudentDashboard = () => {
-  return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Student Dashboard</h1>
+  const [activePage, setActivePage] = useState("dashboard");
 
-      {/* Main Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {stats.map((stat, idx) => (
-          <Card key={idx}>
-            <div className="flex items-center space-x-4">
-              <div className="bg-blue-500 p-3 rounded-full">{stat.icon}</div>
-              <div>
-                <p className="text-xl font-semibold">{stat.value}</p>
-                <p className="text-gray-500">{stat.label}</p>
+  // Sidebar link helper
+  const linkClass = (page) =>
+    `flex items-center gap-2 py-2 px-4 rounded-md my-1 cursor-pointer ${
+      activePage === page
+        ? "bg-gray-700 text-white font-medium"
+        : "text-gray-300 hover:bg-gray-700 hover:text-white"
+    }`;
+
+  // Render the main content depending on active page
+  const renderContent = () => {
+    switch (activePage) {
+      case "applications":
+        return <StudentMyapplications />;
+      case "interviews":
+        return <StudentInterviews />;
+      case "opportunities":
+        return <StudentOpportunities />;
+      case "profile":
+        return <StudentProfile />;
+      default:
+        return (
+          <div>
+            {/* === Default Dashboard Content === */}
+            <h2 className="text-2xl font-bold mb-4">📊 Dashboard Overview</h2>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              <div className="bg-white shadow rounded-lg p-4">
+                <p className="text-gray-500">Applications</p>
+                <p className="text-2xl font-bold">12</p>
+              </div>
+              <div className="bg-white shadow rounded-lg p-4">
+                <p className="text-gray-500">Interviews</p>
+                <p className="text-2xl font-bold">3</p>
+              </div>
+              <div className="bg-white shadow rounded-lg p-4">
+                <p className="text-gray-500">Selected</p>
+                <p className="text-2xl font-bold">1</p>
+              </div>
+              <div className="bg-white shadow rounded-lg p-4">
+                <p className="text-gray-500">Under Review</p>
+                <p className="text-2xl font-bold">4</p>
               </div>
             </div>
-          </Card>
-        ))}
-      </div>
 
-      {/* Achievements */}
-      <h2 className="text-2xl font-semibold mb-4">Achievements</h2>
-      <div className="flex flex-wrap gap-4 mb-8">
-        {achievements.map((ach, idx) => (
-          <SmCard key={idx}>
-            <div className="flex items-center space-x-2">
-              {ach.icon}
-              <span>{ach.label}</span>
+            {/* Calendar (simple grid for demo) */}
+            <div className="bg-white shadow rounded-lg p-6">
+              <h3 className="text-lg font-semibold mb-2">📅 Calendar</h3>
+              <div className="grid grid-cols-7 gap-2 text-center text-sm">
+                {Array.from({ length: 30 }, (_, i) => (
+                  <div
+                    key={i}
+                    className="p-2 border rounded hover:bg-gray-100 cursor-pointer"
+                  >
+                    {i + 1}
+                  </div>
+                ))}
+              </div>
             </div>
-          </SmCard>
-        ))}
-      </div>
+          </div>
+        );
+    }
+  };
 
-      {/* Recent Activities Table */}
-      <h2 className="text-2xl font-semibold mb-4">Recent Activities</h2>
-      <div className="overflow-x-auto bg-white rounded shadow">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activity</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            <tr>
-              <td className="px-6 py-4 whitespace-nowrap">Submitted Application to XYZ Corp</td>
-              <td className="px-6 py-4 whitespace-nowrap">2025-09-18</td>
-              <td className="px-6 py-4 whitespace-nowrap text-green-500 font-semibold">Pending</td>
-            </tr>
-            <tr>
-              <td className="px-6 py-4 whitespace-nowrap">Interview Scheduled with ABC Ltd</td>
-              <td className="px-6 py-4 whitespace-nowrap">2025-09-20</td>
-              <td className="px-6 py-4 whitespace-nowrap text-blue-500 font-semibold">Scheduled</td>
-            </tr>
-            <tr>
-              <td className="px-6 py-4 whitespace-nowrap">Completed Training on React</td>
-              <td className="px-6 py-4 whitespace-nowrap">2025-09-15</td>
-              <td className="px-6 py-4 whitespace-nowrap text-purple-500 font-semibold">Completed</td>
-            </tr>
-          </tbody>
-        </table>
+  return (
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <aside className="w-64 bg-gray-800 text-white fixed h-full flex flex-col">
+        <div className="p-6 text-2xl font-bold border-b border-gray-700">
+          Student Portal
+        </div>
+        <nav className="mt-4 flex-1 px-2">
+          <div onClick={() => setActivePage("dashboard")} className={linkClass("dashboard")}>
+            <BarChart size={18} /> Dashboard
+          </div>
+          <div onClick={() => setActivePage("applications")} className={linkClass("applications")}>
+            <FileText size={18} /> My Applications
+          </div>
+          <div onClick={() => setActivePage("interviews")} className={linkClass("interviews")}>
+            <Briefcase size={18} /> Interviews
+          </div>
+          <div onClick={() => setActivePage("opportunities")} className={linkClass("opportunities")}>
+            <BarChart size={18} /> Opportunities
+          </div>
+          <div onClick={() => setActivePage("profile")} className={linkClass("profile")}>
+            <User size={18} /> Profile
+          </div>
+        </nav>
+        <div className="p-4 border-t border-gray-700 text-sm text-gray-400">
+          © 2025 CampusConnect
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <div className="flex-1 ml-64 flex flex-col">
+        {/* Top Navbar */}
+        <header className="h-16 bg-white shadow flex items-center justify-between px-6">
+          <h1 className="text-xl font-semibold">Welcome, Aman 👋</h1>
+          <div className="flex items-center gap-4">
+            <button className="p-2 rounded-full hover:bg-gray-200">
+              <Bell className="h-5 w-5 text-gray-700" />
+            </button>
+            <UserCircle2 className="h-8 w-8 text-gray-700" />
+          </div>
+        </header>
+
+        {/* Dynamic Page Content */}
+        <main className="flex-1 p-6 overflow-y-auto">{renderContent()}</main>
       </div>
     </div>
   );

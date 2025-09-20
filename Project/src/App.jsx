@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LandingPage from "./pages/LandingPage.jsx";
 import AuthPage from "./AuthPage.jsx";
-import StudentDashboard from "./pages/PlacementDashboard.jsx";
+import StudentDashboard from "./pages/studentDashboard.jsx";
 import HRDashboard from "./pages/HRDashboard.jsx";
 import PlacementDashboard from "./pages/PlacementDashboard.jsx";
 
