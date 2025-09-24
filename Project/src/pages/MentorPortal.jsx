@@ -1,34 +1,34 @@
 import React, { useState } from "react";
-import { Bell, UserCircle2, BarChart, Building2, UserPlus, Users } from "lucide-react";
+import { Bell, UserCircle2, BarChart, Users, MessageCircle, Calendar } from "lucide-react";
 
-// Import placement cell section components
-import PlacementOverview from "../components/placementOverview";
-import PlacementCompanies from "../components/placementCompanies";
-import PlacementStudents from "../components/placementStudents";
-import PlacementAccess from "../components/placementAccess";
+// Import mentor section components
+import MentorOverview from "../components/mentorOverview";
+import MentorStudents from "../components/mentorStudents";
+import MentorFeedback from "../components/mentorFeedback";
+import MentorSessions from "../components/mentorSessions";
 
-const PlacementCell = () => {
+const MentorPortal = () => {
   const [activePage, setActivePage] = useState("overview");
 
-  // Sidebar link style
+  // Sidebar link helper
   const linkClass = (page) =>
     `flex items-center gap-2 py-2 px-4 rounded-md my-1 cursor-pointer ${
       activePage === page
-        ? "bg-blue-600 text-white font-medium"
-        : "text-gray-300 hover:bg-blue-600 hover:text-white"
+        ? "bg-purple-600 text-white font-medium"
+        : "text-gray-300 hover:bg-purple-600 hover:text-white"
     }`;
 
-  // Render dynamic content
+  // Dynamic content render
   const renderContent = () => {
     switch (activePage) {
-      case "companies":
-        return <PlacementCompanies />;
       case "students":
-        return <PlacementStudents />;
-      case "access":
-        return <PlacementAccess />;
+        return <MentorStudents />;
+      case "feedback":
+        return <MentorFeedback />;
+      case "sessions":
+        return <MentorSessions />;
       default:
-        return <PlacementOverview />;
+        return <MentorOverview />;
     }
   };
 
@@ -37,32 +37,20 @@ const PlacementCell = () => {
       {/* Sidebar */}
       <aside className="w-64 bg-gray-800 text-white fixed h-full flex flex-col">
         <div className="p-6 text-2xl font-bold border-b border-gray-700">
-          Placement Cell
+          Mentor Portal
         </div>
         <nav className="mt-4 flex-1 px-2">
-          <div
-            onClick={() => setActivePage("overview")}
-            className={linkClass("overview")}
-          >
+          <div onClick={() => setActivePage("overview")} className={linkClass("overview")}>
             <BarChart size={18} /> Dashboard
           </div>
-          <div
-            onClick={() => setActivePage("companies")}
-            className={linkClass("companies")}
-          >
-            <Building2 size={18} /> Companies
-          </div>
-          <div
-            onClick={() => setActivePage("students")}
-            className={linkClass("students")}
-          >
+          <div onClick={() => setActivePage("students")} className={linkClass("students")}>
             <Users size={18} /> Students
           </div>
-          <div
-            onClick={() => setActivePage("access")}
-            className={linkClass("access")}
-          >
-            <UserPlus size={18} /> Recruiter Access
+          <div onClick={() => setActivePage("feedback")} className={linkClass("feedback")}>
+            <MessageCircle size={18} /> Feedback
+          </div>
+          <div onClick={() => setActivePage("sessions")} className={linkClass("sessions")}>
+            <Calendar size={18} /> Sessions
           </div>
         </nav>
         <div className="p-4 border-t border-gray-700 text-sm text-gray-400">
@@ -74,7 +62,7 @@ const PlacementCell = () => {
       <div className="flex-1 ml-64 flex flex-col">
         {/* Top Navbar */}
         <header className="h-16 bg-white shadow flex items-center justify-between px-6">
-          <h1 className="text-xl font-semibold">Welcome, Placement Officer 👋</h1>
+          <h1 className="text-xl font-semibold">Welcome, Mentor 👋</h1>
           <div className="flex items-center gap-4">
             <button className="p-2 rounded-full hover:bg-gray-200">
               <Bell className="h-5 w-5 text-gray-700" />
@@ -90,4 +78,4 @@ const PlacementCell = () => {
   );
 };
 
-export default PlacementCell;
+export default MentorPortal;

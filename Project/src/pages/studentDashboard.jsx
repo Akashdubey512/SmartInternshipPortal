@@ -8,7 +8,6 @@ import { Bell, UserCircle2, BarChart, FileText, Briefcase, User } from "lucide-r
 import StudentInterviews from "../components/studentInterviews";
 import StudentMyapplications from "../components/studentMyapplications";
 import StudentOpportunities from "../components/studentOpportunities";
-import StudentProfile from "../components/studentProfile";
 
 const StudentDashboard = () => {
   const [activePage, setActivePage] = useState("dashboard");
@@ -97,9 +96,7 @@ const StudentDashboard = () => {
           <div onClick={() => setActivePage("opportunities")} className={linkClass("opportunities")}>
             <BarChart size={18} /> Opportunities
           </div>
-          <div onClick={() => setActivePage("profile")} className={linkClass("profile")}>
-            <User size={18} /> Profile
-          </div>
+         
         </nav>
         <div className="p-4 border-t border-gray-700 text-sm text-gray-400">
           © 2025 CampusConnect

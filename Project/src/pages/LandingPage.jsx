@@ -1,8 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Users, Target, BarChart, Star, Award, Shield, Zap, Globe } from "lucide-react";
 
-const LandingPage = ({ onGetStarted }) => {
-   return (
+const LandingPage = () => {
+  const navigate = useNavigate();
+
+  // Navigate to Auth Page
+  const goToAuth = () => {
+    navigate("/auth");
+  };
+
+  return (
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -19,7 +27,7 @@ const LandingPage = ({ onGetStarted }) => {
               <a href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition-colors">How It Works</a>
               <a href="#testimonials" className="text-gray-600 hover:text-blue-600 transition-colors">Success Stories</a>
               <button 
-                onClick={onGetStarted}
+                onClick={goToAuth}
                 className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Get Started
@@ -43,13 +51,16 @@ const LandingPage = ({ onGetStarted }) => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button 
-                  onClick={onGetStarted}
+                  onClick={goToAuth}
                   className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
                 >
                   Apply Now
                   <ArrowRight className="w-5 h-5" />
                 </button>
-                <button className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors">
+                <button 
+                  onClick={goToAuth} 
+                  className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors"
+                >
                   How It Works
                 </button>
               </div>
@@ -73,10 +84,7 @@ const LandingPage = ({ onGetStarted }) => {
                 src="src/unnamed1.png" 
                 alt="Students using CampusSelection platform" 
                 className="rounded-2xl shadow-2xl"
-                onError={(e) => {
-                  // Fallback to a placeholder if image fails to load
-                  e.currentTarget.src = 'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg';
-                }}
+                onError={(e) => { e.currentTarget.src = 'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg'; }}
               />
               <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-4 border">
                 <div className="flex items-center gap-3">
@@ -261,7 +269,7 @@ const LandingPage = ({ onGetStarted }) => {
             Join thousands of students and hundreds of companies already using CampusConnect
           </p>
           <button 
-            onClick={onGetStarted}
+            onClick={goToAuth}
             className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
           >
             Get Started Today
